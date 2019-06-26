@@ -1,0 +1,30 @@
+require "erb"
+require "ostruct"
+
+module ArgoTunnel
+	class Command < Vagrant.plugin(2, :command)
+		def self.synopsis
+			"Share your site via CloudFlare's Argo Tunnel"
+		end
+
+		def execute
+			config = Chassis.config
+
+			opts = OptionParser.new
+			argv = parse_options(opts)
+
+			@env.ui.info("Opening the tunnel...")
+			system("vagrant ssh -c 'cloudflared tunnel --url #{config['hosts'][0]}'")
+
+			0
+		end
+	end
+
+	class ArgoTunnelPlugin < Vagrant.plugin("2")
+		name "Argo"
+
+		command "argo" do
+			Command
+		end
+	end
+end
