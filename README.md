@@ -1,3 +1,5 @@
+### [BROKEN] This is currently broken as the cloudflared client does not allow forwarding/spoofing host headers.
+
 # Argo Tunnel for Chassis
 
 Adds a handy `vagrant argo` command to use Argo Tunnel to provide public access to your website to mobile or remote networks.
